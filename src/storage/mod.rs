@@ -13,27 +13,27 @@ pub use postgresql::PostgresStorage;
 
 #[derive(Debug, thiserror::Error)]
 pub enum StorageError {
-    #[error("接続エラー: {0}")]
+    #[error("Connection error: {0}")]
     ConnectionError(String),
-    #[error("キーが見つかりません: {0}")]
+    #[error("Key not found: {0}")]
     KeyNotFound(String),
-    #[error("値の型が不正です: {0}")]
+    #[error("Invalid value type: {0}")]
     InvalidValueType(String),
-    #[error("データベースエラー: {0}")]
+    #[error("Database error: {0}")]
     DatabaseError(String),
 }
 
 #[async_trait]
 pub trait StorageBackend: Send + Sync {
-    /// キーに対応する現在のカウント値を取得
+    /// Get the current count value for the key
     async fn get(&self, key: &str) -> Result<u32, StorageError>;
 
-    /// キーに対応するカウント値をインクリメント
+    /// Increment the count value for the key
     async fn increment(&mut self, key: &str, expire: u32) -> Result<(), StorageError>;
 
-    /// キーに対応する値を削除
+    /// Delete the value for the key
     async fn delete(&mut self, key: &str) -> Result<(), StorageError>;
 
-    /// 有効期限切れのキーを削除
+    /// Clean up expired keys
     async fn cleanup_expired(&mut self) -> Result<(), StorageError>;
 }
