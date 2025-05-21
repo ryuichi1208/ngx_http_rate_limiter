@@ -5,11 +5,15 @@ mod redis;
 mod memcached;
 mod mysql;
 mod postgresql;
+mod sqlite;
+mod memory;
 
 pub use redis::RedisStorage;
 pub use memcached::MemcachedStorage;
 pub use mysql::MySQLStorage;
 pub use postgresql::PostgresStorage;
+pub use sqlite::SQLiteStorage;
+pub use memory::MemoryStorage;
 
 #[derive(Debug, thiserror::Error)]
 pub enum StorageError {
