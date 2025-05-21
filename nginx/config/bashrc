@@ -1,8 +1,0 @@
-export PS1='\u@\h \t \w \$ '
-
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias ll='ls -l'
-alias tree='tree -C'
-alias mv='mv -i'
-alias rm='rm -i'
